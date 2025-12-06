@@ -5,7 +5,7 @@ import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { LanguageSwitcher } from "@/src/components/layout/LanguageSwitcher";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 
 const navLinks = [
   { href: "/", label: "Accueil" },
