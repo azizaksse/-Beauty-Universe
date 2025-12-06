@@ -183,7 +183,14 @@ export default function Home() {
               rel="noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-neutral-800 transition hover:bg-neutral-100"
             >
-              <span className="text-sm font-semibold">TikTok</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 256 256"
+                className="h-5 w-5"
+                fill="currentColor"
+              >
+                <path d="M211.8 90.8a73.7 73.7 0 0 1-42.7-13.5v63.2a56 56 0 1 1-56-56 56.6 56.6 0 0 1 10.4 1V118a24 24 0 1 0 17 23.1V24h28a45.7 45.7 0 0 0 2.7 15.5c5.8 15.1 18.4 27.2 33.8 32.6l6.6 2.3v28.3Z" />
+              </svg>
             </a>
           </div>
         </div>

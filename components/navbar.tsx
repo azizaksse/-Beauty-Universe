@@ -5,6 +5,7 @@ import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "@/src/components/layout/LanguageSwitcher";
 
 const navLinks = [
   { href: "/", label: "Accueil" },
@@ -39,7 +40,7 @@ export function Navbar() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <span className="text-xl font-bold tracking-tight text-black">
+            <span className="text-xl font-bold tracking-tight text-[#796A65]">
               Ophira Style
             </span>
           </Link>
@@ -57,7 +58,8 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex flex-1 items-center justify-end gap-3 text-neutral-800">
+        <div className="flex flex-1 items-center justify-end gap-4 text-neutral-800">
+          <LanguageSwitcher />
           <button
             aria-label="Rechercher"
             className="rounded-full border border-neutral-200 p-2 hover:bg-neutral-50"
@@ -100,7 +102,8 @@ export function Navbar() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <div className="flex flex-col p-4">
+              <div className="flex flex-col gap-4 p-4">
+                <LanguageSwitcher orientation="horizontal" />
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
