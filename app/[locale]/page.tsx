@@ -6,21 +6,22 @@ import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Truck, RefreshCw, CreditCard, Facebook, Instagram, MessageCircle } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 const categories = [
   {
-    title: "Robes",
+    titleKey: "Robes",
     image: "/images/products (2).webp",
     href: "/collections/robes",
   },
   {
-    title: "Abayas",
+    titleKey: "Abayas",
     image: "/images/products (3).webp",
     href: "/collections/abayas",
   },
   {
-    title: "Ensembles",
+    titleKey: "Ensembles",
     image: "/images/products (4).webp",
     href: "/collections/ensembles",
   },
@@ -28,28 +29,32 @@ const categories = [
 
 const bestSellers = [
   {
-    title: "Robe Ophira Blanche",
+    titleKey: "RobeOphiraBlanche",
     price: "5 499 د.ج",
     image: "/images/products (5).webp",
   },
   {
-    title: "Abaya Noir Minimal",
+    titleKey: "AbayaNoirMinimal",
     price: "6 299 د.ج",
     image: "/images/products (6).webp",
   },
   {
-    title: "Ensemble Sable",
+    titleKey: "EnsembleSable",
     price: "4 999 د.ج",
     image: "/images/products (2).webp",
   },
   {
-    title: "Abaya Nuit",
+    titleKey: "AbayaNuit",
     price: "6 499 د.ج",
     image: "/images/products (3).webp",
   },
 ];
 
 export default function Home() {
+  const t = useTranslations("HomePage");
+  const tCategories = useTranslations("Categories");
+  const tProducts = useTranslations("Products");
+
   return (
     <div className="min-h-screen bg-white text-neutral-900">
       <Navbar />
@@ -59,28 +64,28 @@ export default function Home() {
         <section className="space-y-6">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
-              Nos Catégories
+              {t("categoriesTitle")}
             </p>
             <h2 className="mt-2 text-2xl font-bold text-neutral-900">
-              Explorez les essentiels Ophira
+              {t("categoriesSubtitle")}
             </h2>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => (
               <Link
-                key={cat.title}
+                key={cat.titleKey}
                 href={cat.href}
                 className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <img
                     src={cat.image}
-                    alt={cat.title}
+                    alt={tCategories(cat.titleKey)}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent" />
                   <div className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-neutral-900">
-                    {cat.title}
+                    {tCategories(cat.titleKey)}
                   </div>
                 </div>
               </Link>
@@ -92,22 +97,22 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
-                Coups de cœur
+                {t("bestSellersTitle")}
               </p>
               <h2 className="mt-2 text-2xl font-bold text-neutral-900">
-                Best sellers du moment
+                {t("bestSellersSubtitle")}
               </h2>
             </div>
             <Link href="/collections/all">
               <Button className="h-11 rounded-md bg-black px-5 text-sm font-semibold text-white">
-                Voir tout
+                {t("viewAll")}
               </Button>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-4 overflow-hidden sm:grid-cols-3 lg:grid-cols-4">
             {bestSellers.map((item, index) => (
               <motion.div
-                key={item.title}
+                key={item.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
@@ -116,13 +121,13 @@ export default function Home() {
                 <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-50">
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={tProducts(item.titleKey)}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="space-y-1 text-center">
                   <p className="text-sm font-semibold text-neutral-900">
-                    {item.title}
+                    {tProducts(item.titleKey)}
                   </p>
                   <p className="text-base font-bold text-neutral-900">{item.price}</p>
                 </div>
@@ -135,18 +140,18 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-3">
             <BadgeItem
               icon={<Truck className="h-5 w-5" />}
-              title="Livraison 58 wilayas"
-              desc="Expédition express et paiement à la réception."
+              title={t("badges.deliveryTitle")}
+              desc={t("badges.deliveryDesc")}
             />
             <BadgeItem
               icon={<RefreshCw className="h-5 w-5" />}
-              title="Échange 7 jours (frais)"
-              desc="Échange possible sous 7 jours avec frais de retour."
+              title={t("badges.exchangeTitle")}
+              desc={t("badges.exchangeDesc")}
             />
             <BadgeItem
               icon={<CreditCard className="h-5 w-5" />}
-              title="Paiement à la livraison"
-              desc="Aucun paiement en ligne, tout se fait à la remise."
+              title={t("badges.paymentTitle")}
+              desc={t("badges.paymentDesc")}
             />
           </div>
         </section>
@@ -155,9 +160,9 @@ export default function Home() {
       <footer className="border-t border-neutral-200 bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-lg font-bold text-neutral-900">Ophira Style</p>
+            <p className="text-lg font-bold text-neutral-900">{t("footer.brand")}</p>
             <p className="text-sm text-neutral-600">
-              Mode feminine premium en Algerie. Paiement a la livraison, 58 wilayas.
+              {t("footer.description")}
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -203,7 +208,7 @@ export default function Home() {
         className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-green-500 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-green-600"
       >
         <MessageCircle className="h-4 w-4" />
-        WhatsApp
+        {t("whatsapp")}
       </a>
     </div>
   );

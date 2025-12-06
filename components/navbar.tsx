@@ -3,27 +3,29 @@
 import { useState } from "react";
 import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./layout/LanguageSwitcher";
-
-const navLinks = [
-  { href: "/", label: "Accueil" },
-  { href: "/collections/abayas", label: "Abayas" },
-  { href: "/collections/robes", label: "Robes" },
-  { href: "/collections/ensembles", label: "Ensembles" },
-  { href: "/pages/contact", label: "Contact" },
-];
+import { useTranslations } from "next-intl";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const t = useTranslations("Navbar");
+
+  const navLinks = [
+    { href: "/", label: t("home") },
+    { href: "/collections/abayas", label: t("abayas") },
+    { href: "/collections/robes", label: t("robes") },
+    { href: "/collections/ensembles", label: t("ensembles") },
+    { href: "/pages/contact", label: t("contact") },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:py-4">
         <div className="flex items-center gap-3 lg:hidden">
           <button
-            aria-label="Ouvrir le menu"
+            aria-label={t("menu")}
             className="rounded-full border border-neutral-200 p-2 hover:bg-neutral-50"
             onClick={() => setOpen(true)}
           >
@@ -61,13 +63,13 @@ export function Navbar() {
         <div className="flex flex-1 items-center justify-end gap-4 text-neutral-800">
           <LanguageSwitcher />
           <button
-            aria-label="Rechercher"
+            aria-label={t("search")}
             className="rounded-full border border-neutral-200 p-2 hover:bg-neutral-50"
           >
             <Search className="h-5 w-5" />
           </button>
           <button
-            aria-label="Panier"
+            aria-label={t("cart")}
             className="rounded-full border border-neutral-200 p-2 hover:bg-neutral-50"
           >
             <ShoppingBag className="h-5 w-5" />
@@ -86,16 +88,16 @@ export function Navbar() {
               onClick={() => setOpen(false)}
             />
             <motion.div
-              className="fixed left-0 top-0 z-50 h-full w-72 bg-white shadow-xl"
+              className="fixed left-0 top-0 z-50 h-full w-72 bg-white shadow-xl ltr:left-0 rtl:right-0 rtl:left-auto"
               initial={{ x: -320 }}
               animate={{ x: 0 }}
               exit={{ x: -320 }}
               transition={{ type: "spring", stiffness: 260, damping: 30 }}
             >
               <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
-                <span className="text-lg font-semibold text-black">Menu</span>
+                <span className="text-lg font-semibold text-black">{t("menu")}</span>
                 <button
-                  aria-label="Fermer le menu"
+                  aria-label={t("close")}
                   className="rounded-full border border-neutral-200 p-2 hover:bg-neutral-50"
                   onClick={() => setOpen(false)}
                 >

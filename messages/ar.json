@@ -1,0 +1,68 @@
+{
+    "HomePage": {
+        "title": "أوفيرا ستايل",
+        "description": "أزياء نسائية فاخرة في الجزائر",
+        "categoriesTitle": "فئاتنا",
+        "categoriesSubtitle": "اكتشفي أساسيات أوفيرا",
+        "bestSellersTitle": "المفضلة",
+        "bestSellersSubtitle": "الأكثر مبيعاً حالياً",
+        "viewAll": "عرض الكل",
+        "badges": {
+            "deliveryTitle": "توصيل 58 ولاية",
+            "deliveryDesc": "شحن سريع والدفع عند الاستلام.",
+            "exchangeTitle": "استبدال خلال 7 أيام",
+            "exchangeDesc": "إمكانية الاستبدال خلال 7 أيام مع رسوم الإرجاع.",
+            "paymentTitle": "الدفع عند الاستلام",
+            "paymentDesc": "لا يوجد دفع عبر الإنترنت، كل شيء يتم عند التسليم."
+        },
+        "footer": {
+            "brand": "أوفيرا ستايل",
+            "description": "أزياء نسائية فاخرة في الجزائر. الدفع عند الاستلام، 58 ولاية."
+        },
+        "whatsapp": "واتساب"
+    },
+    "Navbar": {
+        "home": "الرئيسية",
+        "abayas": "عبايات",
+        "robes": "فساتين",
+        "ensembles": "أطقم",
+        "contact": "اتصل بنا",
+        "search": "بحث",
+        "cart": "السلة",
+        "menu": "القائمة",
+        "close": "إغلاق القائمة"
+    },
+    "HomeHero": {
+        "newCollection": "تشكيلة جديدة 2025",
+        "title": "أناقة بسيطة مستوحاة من أوفيرا – مصممة للجزائر",
+        "description": "أقمشة فاخرة، قصات عصرية، توصيل لـ 58 ولاية. اكتشفي فساتيننا، عباياتنا وأطقمنا المميزة.",
+        "cta": "اكتشفي الآن"
+    },
+    "ContactPage": {
+        "title": "اتصل بنا",
+        "description": "نحن هنا لمساعدتك. أرسلي لنا رسالة أو اتصلي بنا.",
+        "form": {
+            "name": "الاسم الكامل",
+            "email": "البريد الإلكتروني",
+            "message": "الرسالة",
+            "submit": "إرسال الرسالة"
+        },
+        "info": {
+            "phone": "الهاتف",
+            "email": "البريد الإلكتروني",
+            "address": "العنوان",
+            "addressValue": "الجزائر العاصمة، الجزائر"
+        }
+    },
+    "Categories": {
+        "Robes": "فساتين",
+        "Abayas": "عبايات",
+        "Ensembles": "أطقم"
+    },
+    "Products": {
+        "RobeOphiraBlanche": "فستان أوفيرا أبيض",
+        "AbayaNoirMinimal": "عباية سوداء بسيطة",
+        "EnsembleSable": "طقم رملي",
+        "AbayaNuit": "عباية ليلية"
+    }
+}

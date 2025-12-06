@@ -1,0 +1,68 @@
+{
+  "HomePage": {
+    "title": "Ophira Style",
+    "description": "Mode feminine premium en Algerie",
+    "categoriesTitle": "Nos Catégories",
+    "categoriesSubtitle": "Explorez les essentiels Ophira",
+    "bestSellersTitle": "Coups de cœur",
+    "bestSellersSubtitle": "Best sellers du moment",
+    "viewAll": "Voir tout",
+    "badges": {
+      "deliveryTitle": "Livraison 58 wilayas",
+      "deliveryDesc": "Expédition express et paiement à la réception.",
+      "exchangeTitle": "Échange 7 jours (frais)",
+      "exchangeDesc": "Échange possible sous 7 jours avec frais de retour.",
+      "paymentTitle": "Paiement à la livraison",
+      "paymentDesc": "Aucun paiement en ligne, tout se fait à la remise."
+    },
+    "footer": {
+      "brand": "Ophira Style",
+      "description": "Mode feminine premium en Algerie. Paiement a la livraison, 58 wilayas."
+    },
+    "whatsapp": "WhatsApp"
+  },
+  "Navbar": {
+    "home": "Accueil",
+    "abayas": "Abayas",
+    "robes": "Robes",
+    "ensembles": "Ensembles",
+    "contact": "Contact",
+    "search": "Rechercher",
+    "cart": "Panier",
+    "menu": "Menu",
+    "close": "Fermer le menu"
+  },
+  "HomeHero": {
+    "newCollection": "Nouvelle collection 2025",
+    "title": "Élégance minimaliste inspirée d'Ophira – pensée pour l'Algérie",
+    "description": "Tissus premium, coupes modernes, livraison 58 wilayas. Découvrez nos robes, abayas et ensembles à forte conversion.",
+    "cta": "Découvrir maintenant"
+  },
+  "ContactPage": {
+    "title": "Contactez-nous",
+    "description": "Nous sommes là pour vous aider. Envoyez-nous un message ou appelez-nous.",
+    "form": {
+      "name": "Nom complet",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Envoyer le message"
+    },
+    "info": {
+      "phone": "Téléphone",
+      "email": "Email",
+      "address": "Adresse",
+      "addressValue": "Alger, Algérie"
+    }
+  },
+  "Categories": {
+    "Robes": "Robes",
+    "Abayas": "Abayas",
+    "Ensembles": "Ensembles"
+  },
+  "Products": {
+    "RobeOphiraBlanche": "Robe Ophira Blanche",
+    "AbayaNoirMinimal": "Abaya Noir Minimal",
+    "EnsembleSable": "Ensemble Sable",
+    "AbayaNuit": "Abaya Nuit"
+  }
+}
