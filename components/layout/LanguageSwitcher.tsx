@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/routing";
+import { usePathname, useRouter } from "../../i18n/routing";
 import { cn } from "@/lib/utils";
 
 type Props = {
