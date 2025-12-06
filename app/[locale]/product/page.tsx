@@ -19,6 +19,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { saveOrder } from "@/app/actions/save-order";
+import { useTranslations } from "next-intl";
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat("fr-DZ", {
+    style: "currency",
+    currency: "DZD",
+    maximumFractionDigits: 0,
+  }).format(price);
+}
 
 const gallery = [
   "/images/products (1).webp",
@@ -36,6 +45,7 @@ const colors = [
   { name: "Olive Mist", swatch: "#7f8c63" },
 ];
 
+// Data moved inside component for localization or kept if language-agnostic
 const wilayas = [
   { code: 1, name: "Adrar" },
   { code: 2, name: "Chlef" },
@@ -130,48 +140,6 @@ const deliveryFees: Record<
   },
 };
 
-const product = {
-  title: 'Robe "Ophira" - Edition Algeria',
-  description:
-    "Robe longue fluide, coupe signature Ophira. Tissu premium, tombee impeccable et details minimalistes pour un look chic sans effort. Paiement a la livraison partout en Algerie.",
-  badge: "Livraison 24h-72h",
-  price: 5499,
-  compareAt: 6999,
-  sku: "OPH-AL-2025",
-  benefits: [
-    "Tissu doux et respirant, ideal pour le climat algerien",
-    "Coupe flatteuse et poches discretes",
-    "Satisfait ou rembourse sous 7 jours",
-  ],
-};
-
-const accordionItems = [
-  {
-    title: "Description",
-    content:
-      "Inspiree des silhouettes epurees, cette robe Ophira combine confort et elegance pour vos sorties, soirees et evenements. Le tissu reste fluide et opaque, ne colle pas et ne froisse presque pas.",
-  },
-  {
-    title: "Guide des tailles",
-    content:
-      "S: 36-38 | M: 38-40 | L: 40-42 | XL: 42-44 | XXL: 44-46. Si vous hesitez entre deux tailles, prenez la plus grande pour plus d'aisance.",
-  },
-  {
-    title: "Livraison & retour",
-    content:
-      "Livraison 24h-72h sur les grandes wilayas (Alger, Oran, Constantine). Paiement cash a la reception. Retour accepte sous 7 jours si l'article est intact avec l'etiquette.",
-  },
-];
-
-const productDetails = [
-  { label: "🧶 القماش", value: "قطيفة فاخرة بوزن 450غ" },
-  { label: "🎨 اللون", value: "أسود فقط 🖤" },
-  { label: "💎 التزيين", value: "أحجار ألماس حر مختارة بعناية" },
-  { label: "🪡 الخياطة", value: "متقونة باحترافية عالية" },
-  { label: "📏 المقاسات", value: "L - XL - XXL" },
-  { label: "✨ لماذا تشتريها؟", value: "مثالية للمناسبات الراقية" },
-];
-
 type Feedback = { status: "idle" | "success" | "error"; message?: string };
 
 export default function Home() {
@@ -183,6 +151,7 @@ export default function Home() {
 }
 
 function ProductPage() {
+  const t = useTranslations("ProductPage");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>("M");
   const [selectedColor, setSelectedColor] = useState(colors[0]);
@@ -197,8 +166,46 @@ function ProductPage() {
   const [note, setNote] = useState("");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [feedback, setFeedback] = useState<Feedback>({ status: "idle" });
-  const [openAccordion, setOpenAccordion] = useState(accordionItems[0].title);
+  const [openAccordion, setOpenAccordion] = useState("Description");
   const [isPending, startTransition] = useTransition();
+
+  const product = {
+    title: t("title"),
+    description: t("description"),
+    badge: t("badge"),
+    price: 5499,
+    compareAt: 6999,
+    sku: t("sku"),
+    benefits: [
+      t("benefits.fabric"),
+      t("benefits.cut"),
+      t("benefits.guarantee"),
+    ],
+  };
+
+  const accordionItems = [
+    {
+      title: t("accordion.description"),
+      content: t("accordion.descriptionContent"),
+    },
+    {
+      title: t("accordion.sizeGuide"),
+      content: t("accordion.sizeGuideContent"),
+    },
+    {
+      title: t("accordion.delivery"),
+      content: t("accordion.deliveryContent"),
+    },
+  ];
+
+  const productDetails = [
+    { label: t("details.fabricLabel"), value: t("details.fabricValue") },
+    { label: t("details.colorLabel"), value: t("details.colorValue") },
+    { label: t("details.decorationLabel"), value: t("details.decorationValue") },
+    { label: t("details.sewingLabel"), value: t("details.sewingValue") },
+    { label: t("details.sizesLabel"), value: t("details.sizesValue") },
+    { label: t("details.whyBuyLabel"), value: t("details.whyBuyValue") },
+  ];
 
   const communes = useMemo(
     () => communeMap[selectedWilaya] ?? ["Commune principale"],
@@ -240,13 +247,13 @@ function ProductPage() {
       if (result.success) {
         setFeedback({
           status: "success",
-          message: "تم استلام طلبك بنجاح! سيتواصل معك فريقنا للتأكيد.",
+          message: t("successMessage"),
         });
         setIsSheetOpen(false);
       } else {
         setFeedback({
           status: "error",
-          message: result.message ?? "تعذر إرسال الطلب. حاول مرة أخرى.",
+          message: result.message ?? t("errorMessage"),
         });
       }
     });
@@ -261,24 +268,24 @@ function ProductPage() {
               O.
             </div>
             <div>
-              <p className="text-lg font-semibold tracking-tight">Ophira Style</p>
+              <p className="text-lg font-semibold tracking-tight">{t("title")}</p>
               <p className="text-xs text-neutral-500">
-                Boutique premium – Paiement a la livraison
+                {t("description").substring(0, 50)}...
               </p>
             </div>
           </div>
           <div className="hidden items-center gap-3 text-sm text-neutral-600 md:flex">
             <div className="flex items-center gap-2">
               <Truck className="h-4 w-4" />
-              <span>Livraison express 58 wilayas</span>
+              <span>{t("badge")}</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="h-4 w-4" />
-              <span>Retour sous 7 jours</span>
+              <span>{t("benefits.guarantee")}</span>
             </div>
             <div className="flex items-center gap-2">
               <CreditCard className="h-4 w-4" />
-              <span>Paiement a la livraison</span>
+              <span>{t("deliveryMethod")}</span>
             </div>
           </div>
         </div>
@@ -349,7 +356,7 @@ function ProductPage() {
           <section className="space-y-4 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-2 text-sm font-semibold text-emerald-700">
               <ShieldCheck className="h-5 w-5" />
-              Paiement a la livraison | Essai possible
+              {t("benefits.guarantee")}
             </div>
             <div className="grid gap-3 text-sm text-neutral-700 sm:grid-cols-3">
               {product.benefits.map((item) => (
@@ -401,10 +408,10 @@ function ProductPage() {
 
           <section className="space-y-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
             <h3 className="text-xl font-bold text-neutral-900">
-              تفاصيل المنتج
+              {t("details.title")}
             </h3>
             <p className="text-lg font-semibold text-neutral-800">
-              جبة كلوش قطيفة راقية – فخامة من أول نظرة
+              {t("details.subtitle")}
             </p>
             <div className="space-y-2 text-right">
               {productDetails.map((item) => (
@@ -444,7 +451,7 @@ function ProductPage() {
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <p className="text-sm font-semibold">Taille</p>
+                <p className="text-sm font-semibold">{t("size")}</p>
                 <div className="flex flex-wrap gap-2">
                   {sizes.map((size) => (
                     <button
@@ -464,7 +471,7 @@ function ProductPage() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-sm font-semibold">Couleur</p>
+                <p className="text-sm font-semibold">{t("color")}</p>
                 <div className="flex flex-wrap gap-3">
                   {colors.map((color) => (
                     <button
@@ -490,7 +497,7 @@ function ProductPage() {
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold">الولاية</label>
+                  <label className="text-sm font-semibold">{t("wilaya")}</label>
                   <div className="relative">
                     <select
                       className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
@@ -514,7 +521,7 @@ function ProductPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold">البلدية</label>
+                  <label className="text-sm font-semibold">{t("commune")}</label>
                   <div className="relative">
                     <select
                       className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
@@ -530,7 +537,7 @@ function ProductPage() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-sm font-semibold">خيار التوصيل</p>
+                <p className="text-sm font-semibold">{t("deliveryMethod")}</p>
                 <div className="grid gap-2 sm:grid-cols-2">
                   <button
                     type="button"
@@ -549,11 +556,11 @@ function ProductPage() {
                       readOnly
                     />
                     <div className="space-y-1">
-                      <p className="text-sm font-semibold">توصيل للمنزل</p>
+                      <p className="text-sm font-semibold">{t("homeDelivery")}</p>
                       <p className="text-xs">
                         {formatPrice(
                           deliveryFees.home[selectedWilaya] ??
-                            deliveryFees.home.default,
+                          deliveryFees.home.default,
                         )}
                       </p>
                     </div>
@@ -575,11 +582,11 @@ function ProductPage() {
                       readOnly
                     />
                     <div className="space-y-1">
-                      <p className="text-sm font-semibold">توصيل للمكتب</p>
+                      <p className="text-sm font-semibold">{t("stopdeskDelivery")}</p>
                       <p className="text-xs">
                         {formatPrice(
                           deliveryFees.stopdesk[selectedWilaya] ??
-                            deliveryFees.stopdesk.default,
+                          deliveryFees.stopdesk.default,
                         )}
                       </p>
                     </div>
@@ -589,17 +596,17 @@ function ProductPage() {
 
               <div className="space-y-2 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">سعر المنتج</span>
+                  <span className="text-neutral-600">{t("productPrice")}</span>
                   <span className="font-semibold">{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-neutral-600">
-                    سعر التوصيل ({deliveryMethod === "home" ? "للمنزل" : "للمكتب"})
+                    {t("deliveryPrice")} ({deliveryMethod === "home" ? t("homeDelivery") : t("stopdeskDelivery")})
                   </span>
                   <span className="font-semibold">{formatPrice(deliveryFee)}</span>
                 </div>
                 <div className="flex items-center justify-between text-base font-semibold">
-                  <span>المجموع</span>
+                  <span>{t("total")}</span>
                   <span>{formatPrice(total)}</span>
                 </div>
               </div>
@@ -620,14 +627,14 @@ function ProductPage() {
       <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-neutral-200 bg-white/95 px-4 py-3 backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-6xl items-center gap-4">
           <div className="flex flex-1 flex-col">
-            <span className="text-xs text-neutral-500">المجموع</span>
+            <span className="text-xs text-neutral-500">{t("total")}</span>
             <span className="text-lg font-semibold">{formatPrice(total)}</span>
           </div>
           <Button
             className="h-12 flex-1 rounded-md bg-black text-white"
             onClick={() => setIsSheetOpen(true)}
           >
-            اشتري الآن
+            {t("submit")}
           </Button>
         </div>
       </div>
@@ -652,9 +659,9 @@ function ProductPage() {
               <div className="flex items-center justify-between pb-4">
                 <div>
                   <p className="text-xs font-semibold uppercase text-amber-600">
-                    Paiement a la livraison
+                    {t("badges.paymentTitle")}
                   </p>
-                  <h3 className="text-xl font-bold">استمارة الطلب</h3>
+                  <h3 className="text-xl font-bold">{t("orderFormTitle")}</h3>
                 </div>
                 <button
                   onClick={() => setIsSheetOpen(false)}
@@ -697,24 +704,25 @@ function OrderForm({
   setNote,
   total,
 }: OrderFormProps) {
+  const t = useTranslations("ProductPage");
   return (
     <form
       action={onSubmit}
       className="space-y-4 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm"
     >
       <div className="space-y-2 text-center">
-        <p className="text-base font-bold">استمارة الطلب</p>
+        <p className="text-base font-bold">{t("orderFormTitle")}</p>
         <div className="space-y-2 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-800">
           <div className="flex items-center justify-between">
-            <span>سعر المنتج</span>
-            <span className="font-semibold">{formatPrice(product.price)}</span>
+            <span>{t("productPrice")}</span>
+            <span className="font-semibold">{formatPrice(5499)}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span>سعر التوصيل</span>
+            <span>{t("deliveryPrice")}</span>
             <span className="font-semibold">يحتسب حسب الولاية</span>
           </div>
           <div className="flex items-center justify-between text-base font-bold">
-            <span>المجموع</span>
+            <span>{t("total")}</span>
             <span>{formatPrice(total)}</span>
           </div>
         </div>
@@ -724,19 +732,19 @@ function OrderForm({
         <div className="space-y-1.5">
           <label className="flex items-center gap-2 text-sm font-semibold">
             <User className="h-4 w-4" />
-            الاسم الكامل
+            {t("fullName")}
           </label>
           <Input
             name="fullName"
             required
-            placeholder="اكتب اسمك الكامل"
+            placeholder={t("fullNamePlaceholder")}
             className="h-11 text-base"
           />
         </div>
         <div className="space-y-1.5">
           <label className="flex items-center gap-2 text-sm font-semibold">
             <Phone className="h-4 w-4" />
-            الهاتف
+            {t("phone")}
           </label>
           <div className="flex items-center gap-2 rounded-md border border-neutral-300 bg-white px-3">
             <span className="text-sm font-semibold text-neutral-600">+213</span>
@@ -752,28 +760,28 @@ function OrderForm({
       </div>
 
       <div className="space-y-1.5">
-        <label className="text-sm font-semibold">العنوان</label>
+        <label className="text-sm font-semibold">{t("address")}</label>
         <Input
           name="address"
           required
-          placeholder="الحي، رقم المنزل، اقرب معلم"
+          placeholder={t("addressPlaceholder")}
           className="h-11 text-base"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label className="text-sm font-semibold">ملاحظات (اختياري)</label>
+        <label className="text-sm font-semibold">{t("notes")}</label>
         <textarea
           name="notes"
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="اختر الحجم، اللون او ملاحظة للتوصيل"
+          placeholder={t("notesPlaceholder")}
           className="min-h-[96px] w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
         />
       </div>
 
       <div className="text-center text-sm font-semibold text-neutral-800">
-        المجموع: {formatPrice(total)}
+        {t("total")}: {formatPrice(total)}
       </div>
 
       <Button
@@ -781,7 +789,7 @@ function OrderForm({
         className="h-12 w-full rounded-md bg-black text-base font-semibold text-white"
         disabled={isPending}
       >
-        {isPending ? "جار ارسال الطلب..." : "اشتري الآن"}
+        {isPending ? t("submitting") : t("submit")}
         <ArrowRight className="h-4 w-4" />
       </Button>
 
@@ -799,6 +807,4 @@ function OrderForm({
   );
 }
 
-function formatPrice(value: number) {
-  return `${value.toLocaleString("fr-DZ")} DA`;
-}
+

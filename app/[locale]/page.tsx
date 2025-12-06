@@ -111,27 +111,28 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4 overflow-hidden sm:grid-cols-3 lg:grid-cols-4">
             {bestSellers.map((item, index) => (
-              <motion.div
-                key={item.titleKey}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="group space-y-3 rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-50">
-                  <img
-                    src={item.image}
-                    alt={tProducts(item.titleKey)}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="space-y-1 text-center">
-                  <p className="text-sm font-semibold text-neutral-900">
-                    {tProducts(item.titleKey)}
-                  </p>
-                  <p className="text-base font-bold text-neutral-900">{item.price}</p>
-                </div>
-              </motion.div>
+              <Link href="/product" key={item.titleKey}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="group space-y-3 rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                >
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-50">
+                    <img
+                      src={item.image}
+                      alt={tProducts(item.titleKey)}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="space-y-1 text-center">
+                    <p className="text-sm font-semibold text-neutral-900">
+                      {tProducts(item.titleKey)}
+                    </p>
+                    <p className="text-base font-bold text-neutral-900">{item.price}</p>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </section>

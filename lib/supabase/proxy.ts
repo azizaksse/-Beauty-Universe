@@ -50,16 +50,11 @@ export async function updateSession(request: NextRequest, response?: NextRespons
   const pathname = request.nextUrl.pathname;
 
   // Simple check to allow public routes (adjust as needed)
-  // Allowing root and locale roots
-  const isPublic =
-    pathname === "/" ||
-    pathname === "/fr" ||
-    pathname === "/ar" ||
-    pathname.includes("/auth") ||
-    pathname.includes("/login");
+  // Only protect routes that start with /protected or /admin
+  const isProtected = pathname.includes("/protected") || pathname.includes("/admin");
 
   if (
-    !isPublic &&
+    isProtected &&
     !user
   ) {
     // no user, potentially respond by redirecting the user to the login page
