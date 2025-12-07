@@ -4,11 +4,9 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
   turbopack: {
     root: __dirname,
   },
 };
 
 export default withNextIntl(nextConfig);
-

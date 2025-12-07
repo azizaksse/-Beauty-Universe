@@ -18,7 +18,8 @@ export function HomeHero() {
           loop
           muted
           playsInline
-          poster="/images/products (1).webp"
+          preload="auto"
+          poster="/images/products/جبة حوتي سواري.webp"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-white/5" />
       </div>

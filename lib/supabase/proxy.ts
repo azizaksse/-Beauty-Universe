@@ -51,17 +51,20 @@ export async function updateSession(request: NextRequest, response?: NextRespons
 
   // Simple check to allow public routes (adjust as needed)
   // Only protect routes that start with /protected or /admin
+  // Simple check to allow public routes (adjust as needed)
+  // Only protect routes that start with /protected or /admin
   const isProtected = pathname.includes("/protected") || pathname.includes("/admin");
 
-  if (
-    isProtected &&
-    !user
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
-  }
+  // Auth check disabled as per user request
+  // if (
+  //   isProtected &&
+  //   !user
+  // ) {
+  //   // no user, potentially respond by redirecting the user to the login page
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = "/auth/login";
+  //   return NextResponse.redirect(url);
+  // }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.
   // If you're creating a new response object with NextResponse.next() make sure to:

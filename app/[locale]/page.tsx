@@ -1,59 +1,41 @@
-"use client";
-
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 import { HomeHero } from "@/components/home-hero";
 import { Navbar } from "@/components/navbar";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import { Truck, RefreshCw, CreditCard, Facebook, Instagram, MessageCircle } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { BestSellersSection } from "@/components/best-sellers-section";
+import { BestSellersSkeleton } from "@/components/best-sellers-skeleton";
 
 const categories = [
   {
     titleKey: "Robes",
-    image: "/images/products (2).webp",
+    image: "/Robes.jpg",
     href: "/collections/robes",
   },
   {
     titleKey: "Abayas",
-    image: "/images/products (3).webp",
+    image: "/Abayas.jpg",
     href: "/collections/abayas",
   },
   {
     titleKey: "Ensembles",
-    image: "/images/products (4).webp",
+    image: "/Ensembles.webp",
     href: "/collections/ensembles",
   },
 ];
 
-const bestSellers = [
-  {
-    titleKey: "RobeOphiraBlanche",
-    price: "5 499 د.ج",
-    image: "/images/products (5).webp",
-  },
-  {
-    titleKey: "AbayaNoirMinimal",
-    price: "6 299 د.ج",
-    image: "/images/products (6).webp",
-  },
-  {
-    titleKey: "EnsembleSable",
-    price: "4 999 د.ج",
-    image: "/images/products (2).webp",
-  },
-  {
-    titleKey: "AbayaNuit",
-    price: "6 499 د.ج",
-    image: "/images/products (3).webp",
-  },
-];
+export default async function Home({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
 
-export default function Home() {
-  const t = useTranslations("HomePage");
-  const tCategories = useTranslations("Categories");
-  const tProducts = useTranslations("Products");
+  const t = await getTranslations("HomePage");
+  const tCategories = await getTranslations("Categories");
 
   return (
     <div className="min-h-screen bg-white text-neutral-900">
@@ -93,49 +75,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
-                {t("bestSellersTitle")}
-              </p>
-              <h2 className="mt-2 text-2xl font-bold text-neutral-900">
-                {t("bestSellersSubtitle")}
-              </h2>
-            </div>
-            <Link href="/collections/all">
-              <Button className="h-11 rounded-md bg-black px-5 text-sm font-semibold text-white">
-                {t("viewAll")}
-              </Button>
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-4 overflow-hidden sm:grid-cols-3 lg:grid-cols-4">
-            {bestSellers.map((item, index) => (
-              <Link href="/product" key={item.titleKey}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="group space-y-3 rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-50">
-                    <img
-                      src={item.image}
-                      alt={tProducts(item.titleKey)}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="space-y-1 text-center">
-                    <p className="text-sm font-semibold text-neutral-900">
-                      {tProducts(item.titleKey)}
-                    </p>
-                    <p className="text-base font-bold text-neutral-900">{item.price}</p>
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <Suspense fallback={<BestSellersSkeleton />}>
+          <BestSellersSection />
+        </Suspense>
 
         <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
           <div className="grid gap-4 sm:grid-cols-3">
