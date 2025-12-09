@@ -43,7 +43,11 @@ export default async function Home({
       <main className="mx-auto flex max-w-6xl flex-col gap-14 px-4 py-10">
         <HomeHero />
 
-        <section className="space-y-6">
+        <Suspense fallback={<BestSellersSkeleton />}>
+          <BestSellersSection />
+        </Suspense>
+
+        {/* <section className="space-y-6">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
               {t("categoriesTitle")}
@@ -73,11 +77,7 @@ export default async function Home({
               </Link>
             ))}
           </div>
-        </section>
-
-        <Suspense fallback={<BestSellersSkeleton />}>
-          <BestSellersSection />
-        </Suspense>
+        </section> */}
 
         <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
           <div className="grid gap-4 sm:grid-cols-3">

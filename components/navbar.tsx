@@ -3,15 +3,19 @@
 import { useState, useEffect } from "react";
 import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./layout/LanguageSwitcher";
 import { useTranslations } from "next-intl";
 
+import { SearchModal } from "./search-modal";
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const t = useTranslations("Navbar");
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,29 +26,34 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "/", label: t("home") },
-    { href: "/collections/abayas", label: t("abayas") },
-    { href: "/collections/robes", label: t("robes") },
-    { href: "/collections/ensembles", label: t("ensembles") },
-    { href: "/pages/contact", label: t("contact") },
+    { href: "/", label: "home" },
+    { href: "/collections/all", label: "catalog" },
+    { href: "/pages/contact", label: "contact" },
   ];
 
   return (
     <>
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {/* Top Bar */}
+      <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-black px-4 text-center text-xs font-medium text-white sm:text-sm">
+        مرحبا بكم التوصيل متوفر 58 ولاية والدفع عند الاستلام
+      </div>
+
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className={cn(
-          "fixed inset-x-0 top-6 z-50 mx-auto flex w-[95%] max-w-5xl items-center justify-between rounded-full border border-white/20 bg-white/10 px-6 py-3 shadow-2xl backdrop-blur-xl transition-all duration-300",
-          scrolled && "bg-white/80 border-white/40 shadow-xl"
+          "fixed inset-x-0 top-12 z-40 mx-auto flex w-[95%] max-w-6xl items-center justify-between rounded-full border border-white/20 bg-white/80 px-6 py-3 shadow-sm backdrop-blur-xl transition-all duration-300",
+          scrolled && "bg-white/95 shadow-md"
         )}
       >
         {/* Mobile Menu Button */}
         <div className="flex items-center lg:hidden">
           <button
             aria-label={t("menu")}
-            className="rounded-full p-2 text-neutral-800 hover:bg-white/20"
+            className="rounded-full p-2 text-neutral-800 hover:bg-black/5"
             onClick={() => setOpen(true)}
           >
             <Menu className="h-5 w-5" />
@@ -53,45 +62,51 @@ export function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 overflow-hidden rounded-full border border-white/20">
-            <img
-              src="/images/logo.png"
-              alt="Ophira Style"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <span className="text-lg font-bold tracking-tight text-neutral-900">
-            Ophira
+          <span className="font-serif text-xl font-bold tracking-tight text-neutral-900">
+            Ophira style <span className="font-sans text-lg font-normal text-neutral-600">اوفيرا ستايل</span>
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-semibold text-neutral-800 transition hover:text-black"
+              className="text-sm font-medium text-neutral-600 transition hover:text-black"
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
+
+          {/* Search Trigger (Desktop) */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="group relative hidden h-9 w-40 items-center justify-start rounded-full border border-neutral-200 bg-transparent px-3 text-sm text-neutral-400 transition-all hover:border-black hover:text-neutral-600 sm:flex"
+          >
+            <span className="flex-1 text-left">Search...</span>
+            <Search className="h-4 w-4 text-neutral-500 group-hover:text-black" />
+          </button>
+
+          {/* Search Trigger (Mobile) */}
           <button
             aria-label={t("search")}
-            className="rounded-full p-2 text-neutral-800 hover:bg-white/20"
+            onClick={() => setSearchOpen(true)}
+            className="rounded-full p-2 text-neutral-800 hover:bg-black/5 sm:hidden"
           >
             <Search className="h-5 w-5" />
           </button>
+
           <button
             aria-label={t("cart")}
-            className="rounded-full p-2 text-neutral-800 hover:bg-white/20"
+            className="rounded-full p-2 text-neutral-800 hover:bg-black/5"
           >
             <ShoppingBag className="h-5 w-5" />
           </button>
@@ -110,33 +125,44 @@ export function Navbar() {
               onClick={() => setOpen(false)}
             />
             <motion.div
-              className="fixed left-0 top-0 z-50 h-full w-72 bg-white/95 backdrop-blur-xl shadow-2xl"
+              className="fixed left-0 top-0 z-50 h-full w-72 bg-white shadow-2xl"
               initial={{ x: -320 }}
               animate={{ x: 0 }}
               exit={{ x: -320 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
-              <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-5">
-                <span className="text-lg font-bold text-neutral-900">{t("menu")}</span>
+              <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
+                <span className="text-lg font-bold text-neutral-900">Menu</span>
                 <button
                   onClick={() => setOpen(false)}
-                  className="rounded-full p-2 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
+                  className="rounded-full p-2 text-neutral-500 hover:bg-neutral-100"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
               <div className="flex flex-col gap-1 p-4">
-                <div className="mb-6 sm:hidden">
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    setSearchOpen(true);
+                  }}
+                  className="mb-4 flex w-full items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-500"
+                >
+                  <Search className="h-4 w-4" />
+                  <span>Search products...</span>
+                </button>
+
+                <div className="mb-4 sm:hidden">
                   <LanguageSwitcher orientation="horizontal" />
                 </div>
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-xl px-5 py-3.5 text-base font-semibold text-neutral-700 transition hover:bg-neutral-100 hover:text-neutral-900"
+                    className="rounded-lg px-4 py-3 text-base font-medium text-neutral-600 transition hover:bg-neutral-50 hover:text-neutral-900"
                     onClick={() => setOpen(false)}
                   >
-                    {link.label}
+                    {t(link.label)}
                   </Link>
                 ))}
               </div>

@@ -21,7 +21,7 @@ export async function createCategory(prevState: any, formData: FormData) {
 
     if (error) {
         console.error("Error creating category:", error);
-        return { error: "Failed to create category" };
+        return { error: error.message };
     }
 
     revalidatePath("/admin/categories");

@@ -58,6 +58,17 @@ export const ALGERIA_WILAYAS = [
     { code: 56, name: "Djanet", nameAr: "جانت" },
     { code: 57, name: "El M'Ghair", nameAr: "المغير" },
     { code: 58, name: "El Meniaa", nameAr: "المنيعة" },
+    { code: 59, name: "Aflou", nameAr: "أفلو" },
+    { code: 60, name: "Aïn Oussera", nameAr: "عين وسارة" },
+    { code: 61, name: "Barika", nameAr: "بريكة" },
+    { code: 62, name: "Bir El Ater", nameAr: "بئر العاتر" },
+    { code: 63, name: "Boussaâda", nameAr: "بوسعادة" },
+    { code: 64, name: "El Abiodh Sidi Cheikh", nameAr: "الأبيض سيدي الشيخ" },
+    { code: 65, name: "El Aricha", nameAr: "العريشة" },
+    { code: 66, name: "El Kantara", nameAr: "القنطرة" },
+    { code: 67, name: "Ksar Chellala", nameAr: "قصر الشلالة" },
+    { code: 68, name: "Ksar El Boukhari", nameAr: "قصر البخاري" },
+    { code: 69, name: "Messaad", nameAr: "مسعد" },
 ];
 
 // Complete baladias for all wilayas

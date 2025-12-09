@@ -13,8 +13,27 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
-    title: "Next.js and Supabase Starter Kit",
-    description: "The fastest way to build apps with Next.js and Supabase",
+    title: "Ophira style اوفيرا ستايل",
+    description: "Mode feminine premium en Algerie | أزياء نسائية فاخرة في الجزائر",
+    icons: {
+        icon: "/images/logo.png",
+        shortcut: "/images/logo.png",
+        apple: "/images/logo.png",
+    },
+    openGraph: {
+        title: "Ophira style اوفيرا ستايل",
+        description: "Mode feminine premium en Algerie | أزياء نسائية فاخرة في الجزائر",
+        images: [
+            {
+                url: "/images/logo.png",
+                width: 800,
+                height: 600,
+                alt: "Ophira Style Logo",
+            },
+        ],
+        locale: "fr_DZ",
+        type: "website",
+    },
 };
 
 const inter = Inter({

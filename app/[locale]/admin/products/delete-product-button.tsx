@@ -4,9 +4,11 @@ import { useState } from "react";
 import { deleteProduct } from "@/app/[locale]/admin/actions/products";
 import { Button } from "@/components/ui/button";
 import { Trash2, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function DeleteProductButton({ id }: { id: string }) {
     const [isDeleting, setIsDeleting] = useState(false);
+    const router = useRouter();
 
     const handleDelete = async () => {
         if (!confirm("Are you sure you want to delete this product?")) return;
@@ -16,6 +18,8 @@ export function DeleteProductButton({ id }: { id: string }) {
             const result = await deleteProduct(id);
             if (result.error) {
                 alert(result.error);
+            } else {
+                router.refresh();
             }
         } catch (error) {
             console.error("Delete failed:", error);

@@ -23,6 +23,7 @@
   },
   "Navbar": {
     "home": "Accueil",
+    "catalog": "Catalogue",
     "abayas": "Abayas",
     "robes": "Robes",
     "ensembles": "Ensembles",
@@ -51,7 +52,9 @@
       "phone": "Téléphone",
       "email": "Email",
       "address": "Adresse",
-      "addressValue": "Alger, Algérie"
+      "addressValue": "Alger, Algérie",
+      "followUs": "Suivez-nous sur",
+      "whatsapp": "Contactez-nous sur WhatsApp"
     }
   },
   "Categories": {
@@ -66,6 +69,7 @@
     "AbayaNuit": "Abaya Nuit"
   },
   "ProductPage": {
+    "backToHome": "Retour à l'accueil",
     "title": "Robe \"Ophira\" - Édition Algérie",
     "description": "Robe longue fluide, coupe signature Ophira. Tissu premium, tombée impeccable et détails minimalistes pour un look chic sans effort. Paiement à la livraison partout en Algérie.",
     "badge": "Livraison 24h-72h",

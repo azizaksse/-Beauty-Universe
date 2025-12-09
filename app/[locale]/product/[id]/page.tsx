@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ProductOrderForm } from "@/components/product-order-form";
+import { ProductGallery } from "@/components/product-gallery";
+import { getShippingZones } from "@/app/[locale]/admin/actions";
 
 export default async function ProductPage({
     params,
@@ -27,6 +29,8 @@ export default async function ProductPage({
         notFound();
     }
 
+    const shippingZones = await getShippingZones();
+
     return (
         <div className="min-h-screen bg-white pb-20 text-neutral-900">
             <Navbar />
@@ -42,35 +46,7 @@ export default async function ProductPage({
 
                 <div className="grid gap-12 lg:grid-cols-2">
                     {/* Image Gallery */}
-                    <div className="space-y-4">
-                        <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-neutral-100">
-                            {product.images && product.images[0] ? (
-                                <img
-                                    src={product.images[0]}
-                                    alt={product.title}
-                                    className="h-full w-full object-cover"
-                                />
-                            ) : (
-                                <div className="flex h-full w-full items-center justify-center text-neutral-400">
-                                    No Image
-                                </div>
-                            )}
-                        </div>
-                        <div className="grid grid-cols-4 gap-4">
-                            {product.images?.slice(1).map((img: string, i: number) => (
-                                <div
-                                    key={i}
-                                    className="aspect-square overflow-hidden rounded-xl bg-neutral-100"
-                                >
-                                    <img
-                                        src={img}
-                                        alt={`${product.title} ${i + 2}`}
-                                        className="h-full w-full object-cover"
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <ProductGallery images={product.images || []} title={product.title} />
 
                     {/* Product Info & Order Form */}
                     <div className="space-y-6">
@@ -89,7 +65,7 @@ export default async function ProductPage({
                             </div>
                         )}
 
-                        <ProductOrderForm product={product} />
+                        <ProductOrderForm product={product} shippingZones={shippingZones} />
                     </div>
                 </div>
             </main>

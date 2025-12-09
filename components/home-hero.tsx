@@ -19,7 +19,6 @@ export function HomeHero() {
           muted
           playsInline
           preload="auto"
-          poster="/images/products/جبة حوتي سواري.webp"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-white/5" />
       </div>

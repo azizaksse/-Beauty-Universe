@@ -83,7 +83,11 @@ export async function deleteProduct(id: string) {
 
     if (error) {
         console.error("Error deleting product:", error);
-        return { error: "Failed to delete product" };
+        // Check for foreign key constraint violation (code 23503 in Postgres)
+        if (error.code === '23503') {
+            return { error: "Cannot delete product because it has associated orders or other records." };
+        }
+        return { error: error.message || "Failed to delete product" };
     }
 
     revalidatePath("/admin/products");
