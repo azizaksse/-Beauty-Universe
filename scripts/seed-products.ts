@@ -6,7 +6,10 @@ import path from 'path';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY; // Using publishable key might not have enough permissions for INSERT if RLS is strict. 
+const supabaseKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY; // Using publishable key might not have enough permissions for INSERT if RLS is strict. 
 // However, I set RLS to allow public insert for storage, but for tables usually it's restricted.
 // I should check if I have a SERVICE_ROLE_KEY or if I can use the existing client logic.
 // Since I am "admin", I probably need the service role key or I need to sign in.
