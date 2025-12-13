@@ -13,7 +13,7 @@ export function HomeHero() {
       <div className="absolute inset-0">
         <video
           className="h-full w-full object-cover"
-          src="/images/herobackground.mp4"
+          src="/images/high-quality%20file%20hero%20bckground.mp4"
           autoPlay
           loop
           muted
@@ -54,7 +54,7 @@ export function HomeHero() {
           transition={{ duration: 0.4, delay: 0.15 }}
         >
           <Link href="/collections/all">
-            <Button className="h-12 rounded-md bg-black px-8 text-base font-semibold text-white shadow-lg shadow-black/20">
+            <Button className="h-12 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 text-base font-bold text-white shadow-lg shadow-gold-400/20 transition-transform hover:scale-105 hover:shadow-gold-400/40">
               {t("cta")}
             </Button>
           </Link>

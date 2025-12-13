@@ -35,7 +35,7 @@ export default async function ContactPage({
                             </div>
                             <div>
                                 <h3 className="font-semibold text-neutral-900">{t("info.phone")}</h3>
-                                <p className="mt-1 text-neutral-600" dir="ltr">+213 700 00 00 00</p>
+                                <p className="mt-1 text-neutral-600" dir="ltr">0771 51 41 01</p>
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@ export default async function ContactPage({
                             </div>
                             <div>
                                 <h3 className="font-semibold text-neutral-900">{t("info.email")}</h3>
-                                <p className="mt-1 text-neutral-600">contact@ophirastyle.com</p>
+                                <p className="mt-1 text-neutral-600">contact@beautyuniverse.com</p>
                             </div>
                         </div>
 
@@ -92,43 +92,17 @@ export default async function ContactPage({
                         </div>
                     </div>
 
-                    {/* Contact Form */}
-                    <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-                        <form className="space-y-4">
-                            <div>
-                                <label htmlFor="name" className="mb-2 block text-sm font-medium text-neutral-900">
-                                    {t("form.name")}
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    className="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="mb-2 block text-sm font-medium text-neutral-900">
-                                    {t("form.email")}
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    className="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="message" className="mb-2 block text-sm font-medium text-neutral-900">
-                                    {t("form.message")}
-                                </label>
-                                <textarea
-                                    id="message"
-                                    rows={4}
-                                    className="w-full rounded-lg border border-neutral-300 px-4 py-2 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
-                                />
-                            </div>
-                            <Button className="w-full bg-black text-white hover:bg-neutral-800">
-                                {t("form.submit")}
-                            </Button>
-                        </form>
+                    {/* Google Map */}
+                    <div className="h-full min-h-[400px] overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.466540645674!2d3.1366667!3d36.7233333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e531e2170364d%3A0x673f32958069502!2s04%20Rue%20ahmed%20ait%20mohand%20el%20harrach%2C%20Algiers%2C%20Algeria!5e0!3m2!1sen!2sdz!4v1709825432100!5m2!1sen!2sdz"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0, minHeight: "400px" }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        />
                     </div>
                 </div>
             </main>

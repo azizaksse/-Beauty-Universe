@@ -1,14 +1,14 @@
 {
   "HomePage": {
-    "title": "Ophira Style",
-    "description": "Mode feminine premium en Algerie",
+    "title": "Beauty Universe",
+    "description": "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques",
     "categoriesTitle": "Nos Catégories",
-    "categoriesSubtitle": "Explorez les essentiels Ophira",
+    "categoriesSubtitle": "Explorez l'univers de la beauté",
     "bestSellersTitle": "Coups de cœur",
     "bestSellersSubtitle": "Best sellers du moment",
     "viewAll": "Voir tout",
     "badges": {
-      "deliveryTitle": "Livraison 58 wilayas",
+      "deliveryTitle": "Livraison 69 wilayas",
       "deliveryDesc": "Expédition express et paiement à la réception.",
       "exchangeTitle": "Échange 7 jours (frais)",
       "exchangeDesc": "Échange possible sous 7 jours avec frais de retour.",
@@ -16,17 +16,17 @@
       "paymentDesc": "Aucun paiement en ligne, tout se fait à la remise."
     },
     "footer": {
-      "brand": "Ophira Style",
-      "description": "Mode feminine premium en Algerie. Paiement a la livraison, 58 wilayas."
+      "brand": "Beauty Universe",
+      "description": "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques en Algérie."
     },
     "whatsapp": "WhatsApp"
   },
   "Navbar": {
     "home": "Accueil",
     "catalog": "Catalogue",
-    "abayas": "Abayas",
-    "robes": "Robes",
-    "ensembles": "Ensembles",
+    "abayas": "Esthétique",
+    "robes": "Coiffure",
+    "ensembles": "Cosmétiques",
     "contact": "Contact",
     "search": "Rechercher",
     "cart": "Panier",
@@ -35,8 +35,8 @@
   },
   "HomeHero": {
     "newCollection": "Nouvelle collection 2025",
-    "title": "Élégance minimaliste inspirée d'Ophira – pensée pour l'Algérie",
-    "description": "Tissus premium, coupes modernes, livraison 58 wilayas. Découvrez nos robes, abayas et ensembles à forte conversion.",
+    "title": "L'Univers de la Beauté en Algérie",
+    "description": "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques. Livraison 69 wilayas.",
     "cta": "Découvrir maintenant"
   },
   "ContactPage": {
@@ -52,28 +52,28 @@
       "phone": "Téléphone",
       "email": "Email",
       "address": "Adresse",
-      "addressValue": "Alger, Algérie",
+      "addressValue": "04 Rue ahmed ait mohand el harrach, Algiers, Algeria",
       "followUs": "Suivez-nous sur",
       "whatsapp": "Contactez-nous sur WhatsApp"
     }
   },
   "Categories": {
-    "Robes": "Robes",
-    "Abayas": "Abayas",
-    "Ensembles": "Ensembles"
+    "Coiffure": "Coiffure",
+    "Esthetique": "Esthétique",
+    "Cosmetiques": "Cosmétiques"
   },
   "Products": {
-    "RobeOphiraBlanche": "Robe Ophira Blanche",
-    "AbayaNoirMinimal": "Abaya Noir Minimal",
-    "EnsembleSable": "Ensemble Sable",
-    "AbayaNuit": "Abaya Nuit"
+    "RobeOphiraBlanche": "Produit Coiffure 1",
+    "AbayaNoirMinimal": "Produit Esthétique 1",
+    "EnsembleSable": "Produit Cosmétique 1",
+    "AbayaNuit": "Produit Esthétique 2"
   },
   "ProductPage": {
     "backToHome": "Retour à l'accueil",
-    "title": "Robe \"Ophira\" - Édition Algérie",
-    "description": "Robe longue fluide, coupe signature Ophira. Tissu premium, tombée impeccable et détails minimalistes pour un look chic sans effort. Paiement à la livraison partout en Algérie.",
+    "title": "Produit Beauty Universe",
+    "description": "Produit de haute qualité pour les professionnels de la coiffure et de l'esthétique. Livraison partout en Algérie.",
     "badge": "Livraison 24h-72h",
-    "sku": "SKU: OPH-AL-2025",
+    "sku": "SKU: BU-2025",
     "price": "5 499 DZD",
     "compareAt": "6 999 DZD",
     "size": "Taille",
@@ -94,39 +94,39 @@
     "address": "Adresse",
     "addressPlaceholder": "Cité, Rue, N° Maison...",
     "notes": "Remarques (Optionnel)",
-    "notesPlaceholder": "Taille, couleur ou instruction de livraison...",
+    "notesPlaceholder": "Instruction de livraison...",
     "submit": "Acheter maintenant",
     "submitting": "Envoi en cours...",
     "successMessage": "Commande reçue avec succès ! Notre équipe vous contactera pour confirmation.",
     "errorMessage": "Erreur lors de l'envoi. Veuillez réessayer.",
     "benefits": {
-      "fabric": "Tissu doux et respirant, idéal pour le climat algérien",
-      "cut": "Coupe flatteuse et poches discrètes",
+      "fabric": "Qualité professionnelle garantie",
+      "cut": "Produits authentiques et certifiés",
       "guarantee": "Satisfait ou remboursé sous 7 jours"
     },
     "accordion": {
       "description": "Description",
-      "descriptionContent": "Inspirée des silhouettes épurées, cette robe Ophira combine confort et élégance pour vos sorties, soirées et événements. Le tissu reste fluide et opaque, ne colle pas et ne froisse presque pas.",
-      "sizeGuide": "Guide des tailles",
-      "sizeGuideContent": "S: 36-38 | M: 38-40 | L: 40-42 | XL: 42-44 | XXL: 44-46. Si vous hésitez entre deux tailles, prenez la plus grande pour plus d'aisance.",
+      "descriptionContent": "Découvrez notre gamme de produits professionnels pour la coiffure et l'esthétique. Conçus pour répondre aux exigences des experts.",
+      "sizeGuide": "Guide",
+      "sizeGuideContent": "Consultez la fiche technique pour plus de détails.",
       "delivery": "Livraison & Retour",
-      "deliveryContent": "Livraison 24h-72h sur les grandes wilayas (Alger, Oran, Constantine). Paiement cash à la réception. Retour accepté sous 7 jours si l'article est intact avec l'étiquette."
+      "deliveryContent": "Livraison 24h-72h sur les grandes wilayas. Paiement cash à la réception. Retour accepté sous 7 jours."
     },
     "details": {
       "title": "Détails du produit",
-      "subtitle": "Robe cloche en velours raffiné – Luxe au premier regard",
-      "fabricLabel": "Tissu",
-      "fabricValue": "Velours premium 450g",
-      "colorLabel": "Couleur",
-      "colorValue": "Noir seulement 🖤",
-      "decorationLabel": "Ornement",
-      "decorationValue": "Pierres de cristal sélectionnées",
-      "sewingLabel": "Couture",
-      "sewingValue": "Finition haute couture",
-      "sizesLabel": "Tailles",
-      "sizesValue": "L - XL - XXL",
+      "subtitle": "Qualité professionnelle",
+      "fabricLabel": "Marque",
+      "fabricValue": "Beauty Universe",
+      "colorLabel": "Type",
+      "colorValue": "Professionnel",
+      "decorationLabel": "Usage",
+      "decorationValue": "Salon & Institut",
+      "sewingLabel": "Origine",
+      "sewingValue": "Importé",
+      "sizesLabel": "Modèle",
+      "sizesValue": "Standard",
       "whyBuyLabel": "Pourquoi l'acheter ?",
-      "whyBuyValue": "Parfaite pour les occasions élégantes"
+      "whyBuyValue": "Le choix des professionnels"
     }
   }
 }

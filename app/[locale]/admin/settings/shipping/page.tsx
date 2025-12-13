@@ -47,7 +47,7 @@ export default function ShippingSettingsPage() {
         <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-2xl font-bold text-gray-900">Shipping Rates</h1>
-                <p className="text-gray-500">Manage delivery prices for all 58 Wilayas</p>
+                <p className="text-gray-500">Manage delivery prices for all 69 Wilayas</p>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">

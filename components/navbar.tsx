@@ -37,7 +37,7 @@ export function Navbar() {
 
       {/* Top Bar */}
       <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-black px-4 text-center text-xs font-medium text-white sm:text-sm">
-        مرحبا بكم التوصيل متوفر 58 ولاية والدفع عند الاستلام
+        مرحبا بكم التوصيل متوفر 69 ولاية والدفع عند الاستلام
       </div>
 
       <motion.header
@@ -61,10 +61,18 @@ export function Navbar() {
         </div>
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-xl font-bold tracking-tight text-neutral-900">
-            Ophira style <span className="font-sans text-lg font-normal text-neutral-600">اوفيرا ستايل</span>
-          </span>
+        <Link href="/" className="flex items-center gap-3">
+          <div className="relative h-12 w-12 overflow-hidden rounded-full border border-neutral-100 bg-white shadow-sm">
+            <img src="/images/logo.png" alt="Beauty Universe" className="h-full w-full object-cover" />
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="font-serif text-lg font-bold tracking-tight text-neutral-900">
+              Beauty Universe
+            </span>
+            <span className="font-sans text-sm font-normal text-neutral-600">
+              بيوتي يونيفرس
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -73,7 +81,7 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-neutral-600 transition hover:text-black"
+              className="text-sm font-medium text-neutral-600 transition hover:text-gold-600"
             >
               {t(link.label)}
             </Link>
@@ -89,9 +97,9 @@ export function Navbar() {
           {/* Search Trigger (Desktop) */}
           <button
             onClick={() => setSearchOpen(true)}
-            className="group relative hidden h-9 w-40 items-center justify-start rounded-full border border-neutral-200 bg-transparent px-3 text-sm text-neutral-400 transition-all hover:border-black hover:text-neutral-600 sm:flex"
+            className="group relative hidden h-9 w-40 items-center justify-between rounded-full border border-neutral-200 bg-transparent px-3 text-sm text-neutral-400 transition-all hover:border-black hover:text-neutral-600 sm:flex"
           >
-            <span className="flex-1 text-left">Search...</span>
+            <span className="text-left">Search...</span>
             <Search className="h-4 w-4 text-neutral-500 group-hover:text-black" />
           </button>
 
@@ -159,7 +167,7 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-lg px-4 py-3 text-base font-medium text-neutral-600 transition hover:bg-neutral-50 hover:text-neutral-900"
+                    className="rounded-lg px-4 py-3 text-base font-medium text-neutral-600 transition hover:bg-gold-50 hover:text-gold-700"
                     onClick={() => setOpen(false)}
                   >
                     {t(link.label)}

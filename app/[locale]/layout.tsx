@@ -13,22 +13,22 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
-    title: "Ophira style اوفيرا ستايل",
-    description: "Mode feminine premium en Algerie | أزياء نسائية فاخرة في الجزائر",
+    title: "Beauty Universe | بيوتي يونيفرس",
+    description: "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques | بيع وتوزيع معدات ومنتجات ومواد الحلاقة والتجميل ومستحضرات التجميل",
     icons: {
         icon: "/images/logo.png",
         shortcut: "/images/logo.png",
         apple: "/images/logo.png",
     },
     openGraph: {
-        title: "Ophira style اوفيرا ستايل",
-        description: "Mode feminine premium en Algerie | أزياء نسائية فاخرة في الجزائر",
+        title: "Beauty Universe | بيوتي يونيفرس",
+        description: "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques | بيع وتوزيع معدات ومنتجات ومواد الحلاقة والتجميل ومستحضرات التجميل",
         images: [
             {
                 url: "/images/logo.png",
                 width: 800,
                 height: 600,
-                alt: "Ophira Style Logo",
+                alt: "Beauty Universe Logo",
             },
         ],
         locale: "fr_DZ",

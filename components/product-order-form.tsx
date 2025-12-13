@@ -278,27 +278,6 @@ export function ProductOrderForm({ product, shippingZones }: ProductOrderFormPro
                     </div>
                 </div>
 
-                {/* Size Selection */}
-                <div className="space-y-3">
-                    <label className="block text-sm font-semibold text-neutral-900">
-                        {isArabic ? "المقاس" : "Taille"}
-                    </label>
-                    <div className="grid grid-cols-5 gap-2">
-                        {DEFAULT_SIZES.map((size) => (
-                            <button
-                                key={size}
-                                type="button"
-                                onClick={() => setSelectedSize(size)}
-                                className={`rounded-xl border-2 px-4 py-3 text-sm font-medium transition ${selectedSize === size
-                                    ? "border-black bg-black text-white"
-                                    : "border-neutral-200 bg-white text-neutral-900 hover:border-neutral-300"
-                                    }`}
-                            >
-                                {size}
-                            </button>
-                        ))}
-                    </div>
-                </div>
             </div>
 
             {/* Price Summary */}
@@ -377,8 +356,8 @@ export function ProductOrderForm({ product, shippingZones }: ProductOrderFormPro
             {/* Submit Button */}
             <Button
                 type="submit"
-                disabled={loading || !selectedWilaya || !selectedColor || !selectedSize}
-                className="h-14 w-full rounded-full bg-black text-base font-bold text-white hover:bg-neutral-800 disabled:opacity-50"
+                disabled={loading || !selectedWilaya || !selectedColor}
+                className="h-14 w-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-base font-bold text-white shadow-lg shadow-[#D4AF37]/20 transition-transform hover:scale-[1.02] disabled:opacity-50"
             >
                 {loading ? (
                     isArabic ? "جاري الإرسال..." : "Envoi en cours..."

@@ -36,13 +36,60 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const debouncedQuery = useDebounceValue(query, 300);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // Hardcoded products for now
+    const allProducts = [
+        {
+            id: "1",
+            title: "Fauteuil de Coiffure Theodore",
+            price: 58000,
+            images: ["/images/products/theodore-barber-chair.png"],
+            slug: "theodore-chair"
+        },
+        {
+            id: "2",
+            title: "Miroir Intelligent LED",
+            price: 25000,
+            images: ["/images/products/smart-mirror-led.png"],
+            slug: "smart-mirror"
+        },
+        {
+            id: "3",
+            title: "Panneaux Alternatifs Bois",
+            price: 4500,
+            images: ["/images/products/wood-alternative-panels.png"],
+            slug: "wood-panels"
+        },
+        {
+            id: "4",
+            title: "Armoire Outils Coiffure",
+            price: 32000,
+            images: ["/images/products/barber-tools-cabinet.png"],
+            slug: "tools-cabinet"
+        },
+        {
+            id: "5",
+            title: "Miroir Intelligent LED 2",
+            price: 26000,
+            images: ["/images/products/smart-mirror-led-2.png"],
+            slug: "smart-mirror-2"
+        }
+    ];
+
     // Fetch products when query changes
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
             try {
-                const products = await searchProducts(debouncedQuery);
-                setResults(products);
+                // Simulate search
+                if (!debouncedQuery.trim()) {
+                    setResults([]);
+                    return;
+                }
+
+                const filtered = allProducts.filter(p =>
+                    p.title.toLowerCase().includes(debouncedQuery.toLowerCase())
+                );
+                setResults(filtered);
             } catch (error) {
                 console.error("Failed to fetch products", error);
             } finally {
@@ -90,11 +137,12 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
                     {/* Modal */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: -20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        initial={{ opacity: 0, scale: 0.95, y: -20, x: "-50%" }}
+                        animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20, x: "-50%" }}
                         transition={{ duration: 0.2 }}
-                        className="fixed left-1/2 top-[10%] z-[70] w-[95%] max-w-4xl -translate-x-1/2 overflow-hidden rounded-2xl bg-white shadow-2xl"
+                        className="fixed left-1/2 top-1/2 z-[70] w-[95%] max-w-4xl overflow-hidden rounded-2xl bg-white shadow-2xl"
+                        style={{ transform: "translate(-50%, -50%)" }}
                     >
                         {/* Header / Search Input */}
                         <div className="flex items-center gap-4 border-b border-neutral-100 p-4 sm:p-6">
@@ -104,7 +152,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                 type="text"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                placeholder="Search..."
+                                placeholder="Rechercher un produit..."
                                 className="flex-1 text-lg font-medium outline-none placeholder:text-neutral-300 sm:text-xl"
                             />
                             <button
@@ -117,33 +165,14 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
                         {/* Content */}
                         <div className="max-h-[70vh] overflow-y-auto p-4 sm:p-6">
-                            {/* Recently Viewed (Mock for now, or could be implemented with localStorage) */}
-                            <div className="mb-8">
-                                <div className="mb-4 flex items-center justify-between">
-                                    <h3 className="text-sm font-semibold text-neutral-500">Recently viewed</h3>
-                                    <button className="text-sm text-neutral-400 hover:text-neutral-600">Clear</button>
-                                </div>
-                                {/* Placeholder for recently viewed items if any */}
-                                {/* For now, we can just show the same products list or a subset if we had local storage logic */}
-                                <p className="text-sm text-neutral-400 italic">No recently viewed items</p>
-                            </div>
-
-                            {/* Products Grid */}
-                            <div>
-                                <h3 className="mb-4 text-sm font-semibold text-neutral-500">Products</h3>
-                                {loading ? (
-                                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                                        {[...Array(4)].map((_, i) => (
-                                            <div key={i} className="animate-pulse space-y-3">
-                                                <div className="aspect-[3/4] rounded-xl bg-neutral-100" />
-                                                <div className="h-4 w-2/3 rounded bg-neutral-100" />
-                                                <div className="h-4 w-1/3 rounded bg-neutral-100" />
-                                            </div>
-                                        ))}
+                            {/* Default View (New Arrivals) when no query */}
+                            {!query && (
+                                <div className="mb-8">
+                                    <div className="mb-4 flex items-center justify-between">
+                                        <h3 className="text-sm font-semibold text-neutral-500">Nouveautés</h3>
                                     </div>
-                                ) : results.length > 0 ? (
                                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                                        {results.map((product) => (
+                                        {allProducts.map((product) => (
                                             <Link
                                                 key={product.id}
                                                 href={`/product/${product.id}`}
@@ -151,35 +180,74 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 className="group block space-y-3"
                                             >
                                                 <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-100">
-                                                    {product.images?.[0] ? (
-                                                        <img
-                                                            src={product.images[0]}
-                                                            alt={product.title}
-                                                            className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                                                        />
-                                                    ) : (
-                                                        <div className="flex h-full w-full items-center justify-center text-neutral-300">
-                                                            <ShoppingBag className="h-8 w-8" />
-                                                        </div>
-                                                    )}
+                                                    <img
+                                                        src={product.images[0]}
+                                                        alt={product.title}
+                                                        className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                                                    />
                                                 </div>
                                                 <div>
                                                     <h4 className="truncate text-sm font-medium text-neutral-900 group-hover:text-neutral-600">
                                                         {product.title}
                                                     </h4>
                                                     <p className="mt-1 text-sm font-semibold text-neutral-900">
-                                                        DA {product.price.toLocaleString()} DZD
+                                                        {product.price.toLocaleString()} DZD
                                                     </p>
                                                 </div>
                                             </Link>
                                         ))}
                                     </div>
-                                ) : (
-                                    <div className="py-10 text-center text-neutral-500">
-                                        No products found for "{query}"
-                                    </div>
-                                )}
-                            </div>
+                                </div>
+                            )}
+
+                            {/* Search Results */}
+                            {query && (
+                                <div>
+                                    <h3 className="mb-4 text-sm font-semibold text-neutral-500">Résultats</h3>
+                                    {loading ? (
+                                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                                            {[...Array(4)].map((_, i) => (
+                                                <div key={i} className="animate-pulse space-y-3">
+                                                    <div className="aspect-[3/4] rounded-xl bg-neutral-100" />
+                                                    <div className="h-4 w-2/3 rounded bg-neutral-100" />
+                                                    <div className="h-4 w-1/3 rounded bg-neutral-100" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : results.length > 0 ? (
+                                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                                            {results.map((product) => (
+                                                <Link
+                                                    key={product.id}
+                                                    href={`/product/${product.id}`}
+                                                    onClick={onClose}
+                                                    className="group block space-y-3"
+                                                >
+                                                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-100">
+                                                        <img
+                                                            src={product.images[0]}
+                                                            alt={product.title}
+                                                            className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="truncate text-sm font-medium text-neutral-900 group-hover:text-neutral-600">
+                                                            {product.title}
+                                                        </h4>
+                                                        <p className="mt-1 text-sm font-semibold text-neutral-900">
+                                                            {product.price.toLocaleString()} DZD
+                                                        </p>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="py-10 text-center text-neutral-500">
+                                            Aucun produit trouvé pour "{query}"
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 </>

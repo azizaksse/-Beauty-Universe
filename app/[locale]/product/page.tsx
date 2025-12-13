@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState, useTransition } from "react";
+import { Suspense, useMemo, useState, useTransition, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
@@ -30,11 +30,11 @@ function formatPrice(price: number) {
 }
 
 const gallery = [
-  "/images/products (1).webp",
-  "/images/products (2).webp",
-  "/images/products (3).webp",
-  "/images/products (4).webp",
-  "/images/products (5).webp",
+  "/images/products/wood-alternative-panels.png",
+  "/images/products/barber-tools-cabinet.png",
+  "/images/products/theodore-barber-chair.png",
+  "/images/products/smart-mirror-led.png",
+  "/images/products/smart-mirror-led-2.png",
 ];
 
 const sizes = ["S", "M", "L", "XL", "XXL"];
@@ -169,6 +169,14 @@ function ProductPage() {
   const [openAccordion, setOpenAccordion] = useState("Description");
   const [isPending, startTransition] = useTransition();
 
+  // Auto-rotate gallery
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === gallery.length - 1 ? 0 : prev + 1));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   const product = {
     title: t("title"),
     description: t("description"),
@@ -264,8 +272,8 @@ function ProductPage() {
       <header className="border-b border-neutral-200">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-black text-white flex items-center justify-center text-lg font-semibold">
-              O.
+            <div className="h-10 w-10 overflow-hidden rounded-full bg-white border border-neutral-200 flex items-center justify-center">
+              <img src="/images/logo.png" alt="Beauty Universe" className="h-full w-full object-cover" />
             </div>
             <div>
               <p className="text-lg font-semibold tracking-tight">{t("title")}</p>
@@ -305,7 +313,7 @@ function ProductPage() {
               >
                 <img
                   src={gallery[currentIndex]}
-                  alt={`Ophira robe ${currentIndex + 1}`}
+                  alt={`Beauty Universe product ${currentIndex + 1}`}
                   className="h-full w-full object-cover"
                 />
               </motion.div>
@@ -631,7 +639,7 @@ function ProductPage() {
             <span className="text-lg font-semibold">{formatPrice(total)}</span>
           </div>
           <Button
-            className="h-12 flex-1 rounded-md bg-black text-white"
+            className="h-12 flex-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] font-bold text-white shadow-lg shadow-[#D4AF37]/20 transition-transform hover:scale-[1.02]"
             onClick={() => setIsSheetOpen(true)}
           >
             {t("submit")}
@@ -786,7 +794,7 @@ function OrderForm({
 
       <Button
         type="submit"
-        className="h-12 w-full rounded-md bg-black text-base font-semibold text-white"
+        className="h-12 w-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-base font-bold text-white shadow-lg shadow-[#D4AF37]/20 transition-transform hover:scale-[1.02]"
         disabled={isPending}
       >
         {isPending ? t("submitting") : t("submit")}

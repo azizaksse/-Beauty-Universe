@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface Product {
     id: string;
@@ -35,7 +36,7 @@ export function BestSellersGrid({ products, translations, hideHeader = false }: 
                         </h2>
                     </div>
                     <Link href="/collections/all">
-                        <Button className="h-11 rounded-md bg-black px-5 text-sm font-semibold text-white">
+                        <Button className="h-11 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] px-6 text-sm font-bold text-white shadow-lg shadow-[#D4AF37]/20 transition-transform hover:scale-105">
                             {translations.viewAll}
                         </Button>
                     </Link>
@@ -52,10 +53,12 @@ export function BestSellersGrid({ products, translations, hideHeader = false }: 
                         >
                             <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-50">
                                 {product.images && product.images.length > 0 ? (
-                                    <img
+                                    <Image
                                         src={product.images[0]}
                                         alt={product.title}
-                                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                        fill
+                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                        className="object-cover transition duration-500 group-hover:scale-105"
                                     />
                                 ) : (
                                     <div className="flex h-full w-full items-center justify-center bg-gray-100 text-gray-400">
