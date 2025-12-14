@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "supabase": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@supabase/mcp-server-postgrest",
+                "https://icyntgrtgmiisfzwnogj.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljeW50Z3J0Z21paXNmendub2dqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU2MDk3MTcsImV4cCI6MjA4MTE4NTcxN30.hAWTAXpYKYDTtUd_T01SM7skaNSDBCCuUA06CUw-TKs"
+            ]
+        }
+    }
+}
