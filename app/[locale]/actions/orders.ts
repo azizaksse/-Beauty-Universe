@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { sendOrderConfirmationEmail } from "@/lib/email/send-order-confirmation";
 
 export async function createOrder(prevState: any, formData: FormData) {
     try {
@@ -36,6 +36,34 @@ export async function createOrder(prevState: any, formData: FormData) {
                 success: false,
                 error: "Failed to create order. Please try again.",
             };
+        }
+
+        // Fetch product details for email
+        const { data: product } = await supabase
+            .from("products")
+            .select("title")
+            .eq("id", orderData.product_id)
+            .single();
+
+        // Send email confirmation
+        try {
+            await sendOrderConfirmationEmail({
+                orderId: data.id,
+                customerName: orderData.customer_name,
+                productTitle: product?.title || "Product",
+                productPrice: orderData.product_price,
+                deliveryPrice: orderData.delivery_price,
+                totalPrice: orderData.total_price,
+                wilaya: orderData.wilaya,
+                baladia: orderData.baladia || "",
+                address: orderData.address || "",
+                phone: orderData.customer_phone,
+                size: orderData.size || undefined,
+                color: orderData.color || undefined,
+            });
+        } catch (emailError) {
+            console.error("Email sending failed:", emailError);
+            // Don't fail the order if email fails
         }
 
         revalidatePath("/admin/orders");

@@ -1,0 +1,57 @@
+{
+    "name": "Beauty Universe - بيوتي يونيفرس",
+    "short_name": "Beauty Universe",
+    "description": "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#D4AF37",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/images/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/images/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "shopping",
+        "beauty",
+        "lifestyle"
+    ],
+    "lang": "ar",
+    "dir": "rtl",
+    "shortcuts": [
+        {
+            "name": "المنتجات",
+            "short_name": "Products",
+            "description": "View all products",
+            "url": "/collections/all",
+            "icons": [
+                {
+                    "src": "/images/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "اتصل بنا",
+            "short_name": "Contact",
+            "description": "Contact us",
+            "url": "/pages/contact",
+            "icons": [
+                {
+                    "src": "/images/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}

@@ -13,8 +13,29 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
-    title: "Beauty Universe | بيوتي يونيفرس",
+    title: "Beauty Universe | بيوتي يونيفرس - معدات الحلاقة والتجميل",
     description: "Vente et Distribution De Matériel et Produits et Articles de Coiffure et d'esthétique et Cosmétiques | بيع وتوزيع معدات ومنتجات ومواد الحلاقة والتجميل ومستحضرات التجميل",
+    keywords: [
+        "beauty universe",
+        "بيوتي يونيفرس",
+        "معدات الحلاقة",
+        "مستحضرات التجميل",
+        "coiffure algérie",
+        "matériel coiffure",
+        "esthétique algérie",
+        "livraison algérie",
+        "توصيل للمنزل",
+        "شراء أونلاين الجزائر"
+    ],
+    authors: [{ name: "Beauty Universe" }],
+    creator: "Beauty Universe",
+    publisher: "Beauty Universe",
+    manifest: "/manifest.json",
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "default",
+        title: "Beauty Universe",
+    },
     icons: {
         icon: "/images/logo.png",
         shortcut: "/images/logo.png",
@@ -33,6 +54,24 @@ export const metadata: Metadata = {
         ],
         locale: "fr_DZ",
         type: "website",
+        siteName: "Beauty Universe",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Beauty Universe | بيوتي يونيفرس",
+        description: "معدات الحلاقة والتجميل - Matériel de Coiffure et Esthétique",
+        images: ["/images/logo.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
     },
 };
 
